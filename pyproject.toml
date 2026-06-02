@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mega-ai"
+version = "0.1.0"
+description = "MEGA_AI modular trading-aware assistant scaffold"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+# httpx: future signed REST; websockets: live_stream.py CLI.
+binance = ["httpx>=0.27", "websockets>=12"]
+voice = [
+  "pyttsx3>=2.90",
+  "SpeechRecognition>=3.10",
+  "sounddevice>=0.5",
+  "numpy>=1.26",
+  "pyaudio>=0.2.14; sys_platform == 'win32'",
+]
+kral = [
+  "mega-ai[voice,binance]",
+]
+all = ["httpx>=0.27", "websockets>=12", "pyttsx3>=2.90", "SpeechRecognition>=3.10"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+  "core*",
+  "data*",
+  "agents*",
+  "voice*",
+  "news*",
+  "binance*",
+  "bist*",
+  "memory*",
+  "logs*",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
